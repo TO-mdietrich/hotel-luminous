@@ -229,7 +229,7 @@
     /* ── WIDGET SECTIONS ── */
     .widget-section {
       padding: 7rem 5rem;
-      overflow: visible;
+      overflow: hidden;
     }
     .widget-section:nth-child(even) { background: var(--light); }
     .widget-section:nth-child(odd) { background: var(--cream); }
@@ -237,6 +237,17 @@
       max-width: 1200px;
       margin: 0 auto;
       width: 100%;
+    }
+    /* Center headings above widgets */
+    .widget-inner .section-tag { text-align: center; }
+    .widget-inner .divider { margin-left: auto; margin-right: auto; }
+    .widget-inner .section-title { text-align: center; }
+
+    /* Force widgets to stay within viewport */
+    .d21-roomList, .d21-packageList, .d21-voucherShop,
+    .d21-availabilityCalendar, .d21-quickbook {
+      max-width: 100% !important;
+      overflow: hidden !important;
     }
 
     /* ── ABOUT ── */
@@ -348,16 +359,25 @@
       .hamburger { display: flex; }
       .hero { padding: 0 2rem 4rem; }
       .section, .section-full { padding: 4rem 1.5rem; }
-      .widget-section { padding: 4rem 1.5rem; }
+      .widget-section { padding: 4rem 1.5rem; overflow: hidden; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-img-wrap::after { display: none; }
       .about-img-wrap img { height: 350px; }
       footer { padding: 3rem 2rem; flex-direction: column; text-align: center; }
       .footer-copy { text-align: center; }
+      /* Force all widget content to stay within screen */
+      .widget-inner { width: 100%; overflow: hidden; padding: 0; }
+      .d21-roomList, .d21-packageList, .d21-voucherShop,
+      .d21-availabilityCalendar, .d21-quickbook {
+        max-width: 100vw !important;
+        width: 100% !important;
+        overflow: hidden !important;
+      }
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 2.5rem; }
       .stats { gap: 1.5rem; }
+      .widget-section { padding: 3rem 1rem; }
     }
   </style>
   <!-- DIRS21 IBE SKRIPT -->
