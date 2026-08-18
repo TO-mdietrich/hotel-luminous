@@ -36,16 +36,18 @@
     }
 
     :root {
-      --black: #0d0d0d;
-      --dark: #1a1a1a;
-      --mid: #2a2a2a;
-      --light: #f5f3ef;
-      --cream: #faf8f4;
+      --black: #111111;
+      --dark: #1c1c1c;
+      --mid: #2e2e2e;
+      --light: #f0ece4;
+      --cream: #f7f4ef;
+      --beige: #e8e0d0;
+      --beige-dark: #c8bfaa;
       --white: #ffffff;
-      --gold: #b8965a;
-      --gold-light: #d4aa6a;
-      --text: #3a3a3a;
-      --text-light: #888;
+      --gold: #9a7c4a;
+      --gold-light: #b8965a;
+      --text: #2a2a2a;
+      --text-light: #7a7a7a;
     }
 
     body {
@@ -61,9 +63,9 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.8rem 5rem;
-      background: rgba(13,13,13,0.92);
+      background: rgba(17,17,17,0.95);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(184,150,90,0.15);
+      border-bottom: 1px solid rgba(154,124,74,0.2);
     }
     .nav-logo {
       font-family: 'Playfair Display', serif;
@@ -125,74 +127,111 @@
     .mobile-menu a:hover { color: var(--gold-light); }
 
     /* ── HERO ── */
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
     .hero {
       height: 100vh;
       position: relative;
       display: flex; flex-direction: column;
-      justify-content: flex-end; align-items: flex-start;
-      padding: 0 5rem 5rem;
-      background: url('ChatGPT Image 8. Mai 2026, 13_32_53.png') center/cover no-repeat;
+      justify-content: center; align-items: center;
+      text-align: center;
       overflow: hidden;
+      background: linear-gradient(
+        -45deg,
+        #111111,
+        #2c2416,
+        #3d3020,
+        #1a1508,
+        #111111,
+        #c8bfaa,
+        #9a7c4a,
+        #111111
+      );
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
     }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.1) 0%,
-        rgba(0,0,0,0.15) 40%,
-        rgba(0,0,0,0.75) 100%
-      );
+      background: radial-gradient(ellipse at center, rgba(184,150,90,0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .hero-content { position: relative; z-index: 2; max-width: 600px; }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 700px;
+      padding: 0 2rem;
+      animation: floatUp 6s ease-in-out infinite;
+    }
     .hero-tag {
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
+      font-size: 0.6rem;
+      letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 1.2rem;
+      color: var(--beige-dark);
+      margin-bottom: 1.5rem;
       opacity: 0;
-      animation: fadeUp 1s ease forwards 0.3s;
+      animation: fadeUp 1s ease forwards 0.3s, floatUp 6s ease-in-out 1s infinite;
     }
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-size: clamp(3.5rem, 8vw, 7rem);
       font-weight: 300;
       color: var(--white);
-      line-height: 1.05;
-      margin-bottom: 1.5rem;
+      line-height: 1.0;
+      margin-bottom: 1rem;
       opacity: 0;
       animation: fadeUp 1s ease forwards 0.5s;
+      letter-spacing: 0.05em;
     }
-    .hero h1 em { font-style: italic; color: var(--gold-light); }
-    .hero p {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.1em;
-      margin-bottom: 2.5rem;
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+      display: block;
+    }
+    .hero-line {
+      width: 60px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--beige-dark), transparent);
+      margin: 1.5rem auto;
       opacity: 0;
       animation: fadeUp 1s ease forwards 0.7s;
     }
-    .btn-hero {
-      display: inline-block;
-      padding: 0.9rem 2.5rem;
-      background: var(--white);
-      color: var(--black);
-      font-size: 0.65rem;
+    .hero p {
+      font-size: 0.8rem;
+      color: rgba(232,224,208,0.7);
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      font-weight: 500;
-      border: none;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.3s ease;
+      margin-bottom: 3rem;
       opacity: 0;
       animation: fadeUp 1s ease forwards 0.9s;
     }
+    .btn-hero {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: transparent;
+      color: var(--beige);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 400;
+      border: 1px solid rgba(232,224,208,0.5);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.4s ease;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.1s;
+    }
     .btn-hero:hover {
-      background: var(--gold-light);
+      background: var(--gold);
+      border-color: var(--gold);
       color: var(--white);
-      box-shadow: 0 8px 30px rgba(184,150,90,0.4);
+      box-shadow: 0 8px 40px rgba(154,124,74,0.4);
     }
 
     /* ── SECTION BASE ── */
@@ -229,7 +268,9 @@
     /* ── WIDGET SECTIONS ── */
     .widget-section {
       padding: 7rem 5rem;
-      overflow: visible;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
     }
     .widget-section:nth-child(even) { background: var(--light); }
     .widget-section:nth-child(odd) { background: var(--cream); }
@@ -237,6 +278,17 @@
       max-width: 1200px;
       margin: 0 auto;
       width: 100%;
+    }
+    /* Center headings above widgets */
+    .widget-inner .section-tag { text-align: center; }
+    .widget-inner .divider { margin-left: auto; margin-right: auto; }
+    .widget-inner .section-title { text-align: center; }
+
+    /* Force widgets to stay within viewport */
+    .d21-roomList, .d21-packageList, .d21-voucherShop,
+    .d21-availabilityCalendar, .d21-quickbook {
+      max-width: 100% !important;
+      overflow: hidden !important;
     }
 
     /* ── ABOUT ── */
@@ -348,16 +400,25 @@
       .hamburger { display: flex; }
       .hero { padding: 0 2rem 4rem; }
       .section, .section-full { padding: 4rem 1.5rem; }
-      .widget-section { padding: 4rem 1.5rem; }
+      .widget-section { padding: 4rem 1.5rem; overflow: hidden; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-img-wrap::after { display: none; }
       .about-img-wrap img { height: 350px; }
       footer { padding: 3rem 2rem; flex-direction: column; text-align: center; }
       .footer-copy { text-align: center; }
+      /* Force all widget content to stay within screen */
+      .widget-inner { width: 100%; overflow: hidden; padding: 0; }
+      .d21-roomList, .d21-packageList, .d21-voucherShop,
+      .d21-availabilityCalendar, .d21-quickbook {
+        max-width: 100vw !important;
+        width: 100% !important;
+        overflow: hidden !important;
+      }
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 2.5rem; }
       .stats { gap: 1.5rem; }
+      .widget-section { padding: 3rem 1rem; }
     }
   </style>
   <!-- DIRS21 IBE SKRIPT -->
@@ -365,7 +426,7 @@
   <script>
     // Fix DIRS21 slider by injecting CSS into Shadow DOM after widgets load
     function fixSliders() {
-      const widgets = document.querySelectorAll('.d21-packageList, .d21-roomList, .d21-voucherShop');
+      const widgets = document.querySelectorAll('.d21-packageList, .d21-roomList, .d21-voucherShop, .d21-quickbook');
       widgets.forEach(widget => {
         const shadow = widget.shadowRoot;
         if (shadow && !shadow._sliderFixed) {
@@ -373,11 +434,31 @@
           style.textContent = `
             .d21-view.d21-slideshow { overflow: hidden !important; }
             .d21-slides { overflow: hidden !important; }
+            :host { background: transparent !important; }
+            .d21-widget-container { background: transparent !important; }
           `;
           shadow.appendChild(style);
           shadow._sliderFixed = true;
         }
       });
+
+      // Fix availability calendar grid layout
+      const calWidget = document.querySelector('.d21-availabilityCalendar');
+      const calShadow = calWidget?.shadowRoot;
+      if (calShadow && !calShadow._calFixed) {
+        const style = document.createElement('style');
+        style.textContent = `
+          * { box-sizing: border-box !important; }
+          .d21-container-view {
+            grid-template-columns: repeat(7, 1fr) !important;
+            width: 100% !important;
+          }
+          :host { width: 100% !important; display: block !important; }
+          .d21-widget-container { width: 100% !important; }
+        `;
+        calShadow.appendChild(style);
+        calShadow._calFixed = true;
+      }
     }
     // Run after DOM is ready and after widgets load
     document.addEventListener('DOMContentLoaded', () => {
@@ -399,7 +480,6 @@
       <li><a href="#zimmer">Zimmer</a></li>
       <li><a href="#arrangements">Arrangements</a></li>
       <li><a href="#gutscheine">Gutscheine</a></li>
-      <li><a href="#kalender">Verfügbarkeit</a></li>
       <li><a href="#ueber">Über uns</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
@@ -413,7 +493,6 @@
     <a href="#zimmer" onclick="toggleMenu()">Zimmer</a>
     <a href="#arrangements" onclick="toggleMenu()">Arrangements</a>
     <a href="#gutscheine" onclick="toggleMenu()">Gutscheine</a>
-    <a href="#kalender" onclick="toggleMenu()">Verfügbarkeit</a>
     <a href="#ueber" onclick="toggleMenu()">Über uns</a>
     <a href="#kontakt" onclick="toggleMenu()">Kontakt</a>
   </div>
@@ -428,11 +507,22 @@
   <section class="hero">
     <div class="hero-content">
       <div class="hero-tag">Willkommen</div>
-      <h1>Hotel<br><em>Luminous</em></h1>
+      <h1>Hotel<em>Luminous</em></h1>
+      <div class="hero-line"></div>
       <p>Luxus · Eleganz · Unvergessliche Momente</p>
       <button class="btn-hero d21-trigger-ibe">Direkt zu unseren Buchungsoptionen</button>
     </div>
   </section>
+
+  <!-- QUICKBOOK -->
+  <div style="background: var(--black); padding: 5rem 5rem 8rem; border-bottom: 1px solid rgba(154,124,74,0.2); position: relative; z-index: 500; overflow: visible;">
+    <div style="max-width: 1200px; margin: 0 auto; overflow: visible; position: relative;">
+      <div class="section-tag" style="text-align:center;">Reservierung</div>
+      <div class="divider" style="margin: 1rem auto 2rem;"></div>
+      <h2 class="section-title" style="text-align:center; color: var(--white);">Jetzt Ihren Aufenthalt <em>buchen</em></h2>
+      <div class="d21-quickbook" d21-widget-uuid="b51945c3-3459-014f-f31b-d01aaec32663" style="overflow: visible; position: relative; z-index: 500;"></div>
+    </div>
+  </div>
 
   <!-- ZIMMER -->
   <div class="widget-section" id="zimmer">
@@ -461,16 +551,6 @@
       <div class="divider"></div>
       <h2 class="section-title">Gutscheine & <em>Geschenkideen</em></h2>
       <div class="d21-voucherShop" d21-widget-uuid="fb2a56fa-7d1c-c70c-5302-e43bdd532acc"></div>
-    </div>
-  </div>
-
-  <!-- KALENDER -->
-  <div class="widget-section" id="kalender">
-    <div class="widget-inner">
-      <div class="section-tag">Planung</div>
-      <div class="divider"></div>
-      <h2 class="section-title">Verfügbarkeits<em>kalender</em></h2>
-      <div class="d21-availabilityCalendar" d21-widget-uuid="961c4305-8d51-4510-e285-c4d47a159345"></div>
     </div>
   </div>
 
